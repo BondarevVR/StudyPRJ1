@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
-
+// added some comment 
 namespace ConsoleApp2
 {
     class Snake
