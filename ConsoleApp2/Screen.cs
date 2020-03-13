@@ -8,17 +8,15 @@ namespace ConsoleApp2
     {
         public Screen()
         {
-            SizeX = 10;
-            SizeY = 4;
+            SizeX = 40;
+            SizeY = 10;
         }
 
         public int SizeX { get; set; }
         public int SizeY { get; set; }
-        public Food Food { get; set; }
-        public Snake Snake { get; set; }
 
         //рисуем границы
-
+        
         public void DisplayBorder()
         {
             for (int i = 1; i <= SizeY; i++)
@@ -42,20 +40,25 @@ namespace ConsoleApp2
             }
         }
 
-        public void DisplayFood()
+        public void DisplayFood(Food food)
         {
-            Console.SetCursorPosition(Food.PositionX - 1, Food.PositionY- 1);
+            Console.SetCursorPosition(food.PositionX, food.PositionY- 1);
             Console.Write("\b");
             Console.Write("*");
             Console.SetCursorPosition(SizeX, SizeY);
         }
 
-        public void DisplaySnakePart()
+        public void DisplaySnakePart(Snake snakePart)
         {
-            Console.SetCursorPosition(Snake.PositionX-1, Snake.PositionY-1);
+            Console.SetCursorPosition(snakePart.PositionX, snakePart.PositionY-1);
             Console.Write("\b");
             Console.Write("0");
             Console.SetCursorPosition(SizeX, SizeY);
+        }
+
+        public void DisplayScore(int Score)
+        {
+            Console.WriteLine("Score is {0}", Score);
         }
     }
 }
