@@ -49,17 +49,43 @@ namespace ConsoleApp2
             }
         }
 
-        /*public bool CheckTouch(Object obj)
+        public bool CheckTouch(Object obj)
         {
             if (obj is Snake)
             {
-                Snake temp;
-                temp = (Snake)obj;
-                if (PositionX == temp.PositionX && PositionY == temp.PositionY)
+                Snake snake;
+                snake = (Snake)obj;
+                if (PositionX == snake.PositionX && PositionY == snake.PositionY)
                 {
-
+                    return true;
                 }
+                else { return false; }
             }
-        }*/
+            else if (obj is Screen)
+            {
+                Screen screen;
+                screen = (Screen)obj;
+                if (PositionX == screen.SizeX || PositionX == 0 || PositionY == 0 || PositionY == screen.SizeY)
+                {
+                    return true;
+                }
+                else { return false; }
+            }
+            else if (obj is Food)
+            {
+                Food food;
+                food = (Food)obj;
+                if (PositionX == food.PositionX && PositionY == food.PositionY)
+                {
+                    return true;
+                }
+                else { return false; }
+            }
+            else
+            {
+                Console.WriteLine("Error object");
+                return false;
+            }
+        }
     }
 }
