@@ -6,14 +6,10 @@ namespace ConsoleApp2
 {
     class Screen
     {
-        public Screen()
-        {
-            SizeX = 40;
-            SizeY = 10;
-        }
-
-        public int SizeX { get; set; }
-        public int SizeY { get; set; }
+        private const int sizeX = 40;
+        private const int sizeY = 10;
+        public int SizeX { get { return sizeX; } }
+        public int SizeY { get { return sizeY; } }
 
         //рисуем границы
         

@@ -17,12 +17,18 @@ namespace ConsoleApp2
             SizeY = ScreenSizeY;
         }
 
-        public int PositionX { get; set; }
-        public int PositionY { get; set; }
+        public int PositionX { get; private set; }
+        public int PositionY { get; private set; }
 
         private int speed = 1;
         private string way = "right";
         ConsoleKeyInfo key;
+
+        public void SetPosition(Snake nextSnakePart)
+        {
+            PositionX = nextSnakePart.PositionX;
+            PositionY = nextSnakePart.PositionY;
+        }
 
         public void Turn()
         {

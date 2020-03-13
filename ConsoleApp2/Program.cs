@@ -54,8 +54,7 @@ namespace ConsoleApp2
                 {
                     for (int i = snakeParts.Count - 1; i > 0; i--)
                     {
-                        snakeParts[i].PositionX = snakeParts[i - 1].PositionX;
-                        snakeParts[i].PositionY = snakeParts[i - 1].PositionY;
+                        snakeParts[i].SetPosition(snakeParts[i - 1]);
                     }
                 }
 

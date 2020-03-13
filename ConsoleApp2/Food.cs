@@ -17,8 +17,8 @@ namespace ConsoleApp2
             SizeY = ScreenSizeY;
         }
 
-        public int  PositionX { get; set; }
-        public int PositionY { get; set; }
+        public int  PositionX { get; private set; }
+        public int PositionY { get; private set; }
 
         public void NewPozition()
         {
