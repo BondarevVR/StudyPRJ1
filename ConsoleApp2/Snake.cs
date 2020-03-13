@@ -7,14 +7,14 @@ namespace ConsoleApp2
 {
     class Snake
     {
-        private int SizeX;
-        private int SizeY;
+        private int sizeX;
+        private int sizeY;
         public Snake(int pX, int pY, int ScreenSizeX, int ScreenSizeY)
         {
             PositionX = pX;
             PositionY = pY;
-            SizeX = ScreenSizeX;
-            SizeY = ScreenSizeY;
+            sizeX = ScreenSizeX;
+            sizeY = ScreenSizeY;
         }
 
         public int PositionX { get; private set; }
@@ -38,7 +38,7 @@ namespace ConsoleApp2
                 way = "left";
                 PositionX -= speed;
             }
-            if (key.Key == ConsoleKey.D && way != "left" && PositionX < SizeX)
+            if (key.Key == ConsoleKey.D && way != "left" && PositionX < sizeX)
             {
                 way = "right";
                 PositionX += speed;
@@ -48,7 +48,7 @@ namespace ConsoleApp2
                 way = "up";
                 PositionY -= speed;
             }
-            if (key.Key == ConsoleKey.S && way != "up" && PositionY < SizeY)
+            if (key.Key == ConsoleKey.S && way != "up" && PositionY < sizeY)
             {
                 way = "down";
                 PositionY += speed;
