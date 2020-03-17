@@ -6,24 +6,24 @@ namespace ConsoleApp2
 {
     class Food
     {
-        Random rand = new Random();
-        private int SizeX;
-        private int SizeY;
-        public Food(int ScreenSizeX, int ScreenSizeY)
+        private Random rand = new Random();
+        private int sizeX;
+        private int sizeY;
+        public Food(int screenSizeX, int screenSizeY)
         {
-            PositionX = rand.Next(1, ScreenSizeX - 1);
-            PositionY = rand.Next(1, ScreenSizeY - 1);
-            SizeX = ScreenSizeX;
-            SizeY = ScreenSizeY;
+            PositionX = rand.Next(1, screenSizeX - 1);
+            PositionY = rand.Next(1, screenSizeY - 1);
+            sizeX = screenSizeX;
+            sizeY = screenSizeY;
         }
 
-        public int  PositionX { get; set; }
-        public int PositionY { get; set; }
+        public int  PositionX { get; private set; }
+        public int PositionY { get; private set; }
 
         public void NewPozition()
         {
-            PositionX = rand.Next(1, SizeX - 1);
-            PositionY = rand.Next(1, SizeY - 1);
+            PositionX = rand.Next(1, sizeX - 1);
+            PositionY = rand.Next(1, sizeY - 1);
         }
     }
 }

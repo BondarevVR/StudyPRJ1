@@ -39,35 +39,34 @@ namespace ConsoleApp2
                 //проверка на самосьедение
                 for (int i = 2; i < snakeParts.Count; i++)
                 {
-                    if (snakeParts[0].PositionX == snakeParts[i].PositionX && snakeParts[0].PositionY == snakeParts[i].PositionY)
+                    if (snakeParts[0].CheckTouch(snakeParts[i]))
                     {
                         loose = true;
                     }
                 }
-                if (snakeParts[0].PositionX == screen.SizeX || snakeParts[0].PositionX == 0 || snakeParts[0].PositionY == 0 || snakeParts[0].PositionY == screen.SizeY)
+                if (snakeParts[0].CheckTouch(screen))
                 {
                     loose = true;
                 }
                 //и перемещение змеи
-                if (snakeParts[0].PositionX == snakeParts[1].PositionX && snakeParts[0].PositionY == snakeParts[1].PositionY) { }
+                if (snakeParts[0].CheckTouch(snakeParts[1])) { }
                 else
                 {
                     for (int i = snakeParts.Count - 1; i > 0; i--)
                     {
-                        snakeParts[i].PositionX = snakeParts[i - 1].PositionX;
-                        snakeParts[i].PositionY = snakeParts[i - 1].PositionY;
+                        snakeParts[i].SetPosition(snakeParts[i - 1]);
                     }
                 }
 
                 //проверка на еду и расширение змеи
-                if (snakeParts[1].PositionX == food.PositionX && snakeParts[1].PositionY == food.PositionY)
+                if (snakeParts[0].CheckTouch(food))
                 {
                     Score++;
                     snakeParts.Add(new Snake(snakeParts[2].PositionX, snakeParts[2].PositionY, screen.SizeX, screen.SizeY));
                     food.NewPozition();
                     for (int i = 1; i < snakeParts.Count; i++)
                     {
-                        if (snakeParts[i].PositionX == food.PositionX && snakeParts[i].PositionY == food.PositionY)
+                        if (snakeParts[i].CheckTouch(food))
                         {
                             food.NewPozition();
                             i = 1;
