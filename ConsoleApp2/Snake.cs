@@ -7,22 +7,28 @@ namespace ConsoleApp2
 {
     class Snake
     {
-        private int SizeX;
-        private int SizeY;
-        public Snake(int pX, int pY, int ScreenSizeX, int ScreenSizeY)
+        private int sizeX;
+        private int sizeY;
+        public Snake(int pX, int pY, int screenSizeX, int screenSizeY)
         {
             PositionX = pX;
             PositionY = pY;
-            SizeX = ScreenSizeX;
-            SizeY = ScreenSizeY;
+            sizeX = screenSizeX;
+            sizeY = screenSizeY;
         }
 
-        public int PositionX { get; set; }
-        public int PositionY { get; set; }
+        public int PositionX { get; private set; }
+        public int PositionY { get; private set; }
 
-        private int speed = 1;
+        private const int speed = 1;
         private string way = "right";
         ConsoleKeyInfo key;
+
+        public void SetPosition(Snake nextSnakePart)
+        {
+            PositionX = nextSnakePart.PositionX;
+            PositionY = nextSnakePart.PositionY;
+        }
 
         public void Turn()
         {
@@ -32,7 +38,7 @@ namespace ConsoleApp2
                 way = "left";
                 PositionX -= speed;
             }
-            if (key.Key == ConsoleKey.D && way != "left" && PositionX < SizeX)
+            if (key.Key == ConsoleKey.D && way != "left" && PositionX < sizeX)
             {
                 way = "right";
                 PositionX += speed;
@@ -42,24 +48,44 @@ namespace ConsoleApp2
                 way = "up";
                 PositionY -= speed;
             }
-            if (key.Key == ConsoleKey.S && way != "up" && PositionY < SizeY)
+            if (key.Key == ConsoleKey.S && way != "up" && PositionY < sizeY+1)
             {
                 way = "down";
                 PositionY += speed;
             }
         }
 
-        /*public bool CheckTouch(Object obj)
+        public bool CheckTouch(Object obj)
         {
             if (obj is Snake)
             {
-                Snake temp;
-                temp = (Snake)obj;
-                if (PositionX == temp.PositionX && PositionY == temp.PositionY)
-                {
-
-                }
+                Snake snake;
+                snake = (Snake)obj;
+                if (PositionX == snake.PositionX && PositionY == snake.PositionY)
+                    return true;
+                return false;
             }
-        }*/
+            else if (obj is Screen)
+            {
+                Screen screen;
+                screen = (Screen)obj;
+                if (PositionX == screen.SizeX || PositionX == 0 || PositionY == 0 || PositionY == screen.SizeY+1)
+                    return true;
+                return false;
+            }
+            else if (obj is Food)
+            {
+                Food food;
+                food = (Food)obj;
+                if (PositionX == food.PositionX && PositionY == food.PositionY)
+                    return true;
+                return false;
+            }
+            else
+            {
+                Console.WriteLine("Error object");
+                return false;
+            }
+        }
     }
 }
