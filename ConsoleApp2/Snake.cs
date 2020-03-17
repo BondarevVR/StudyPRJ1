@@ -9,18 +9,18 @@ namespace ConsoleApp2
     {
         private int sizeX;
         private int sizeY;
-        public Snake(int pX, int pY, int ScreenSizeX, int ScreenSizeY)
+        public Snake(int pX, int pY, int screenSizeX, int screenSizeY)
         {
             PositionX = pX;
             PositionY = pY;
-            sizeX = ScreenSizeX;
-            sizeY = ScreenSizeY;
+            sizeX = screenSizeX;
+            sizeY = screenSizeY;
         }
 
         public int PositionX { get; private set; }
         public int PositionY { get; private set; }
 
-        private int speed = 1;
+        private const int speed = 1;
         private string way = "right";
         ConsoleKeyInfo key;
 
@@ -48,7 +48,7 @@ namespace ConsoleApp2
                 way = "up";
                 PositionY -= speed;
             }
-            if (key.Key == ConsoleKey.S && way != "up" && PositionY < sizeY)
+            if (key.Key == ConsoleKey.S && way != "up" && PositionY < sizeY+1)
             {
                 way = "down";
                 PositionY += speed;
@@ -62,30 +62,24 @@ namespace ConsoleApp2
                 Snake snake;
                 snake = (Snake)obj;
                 if (PositionX == snake.PositionX && PositionY == snake.PositionY)
-                {
                     return true;
-                }
-                else { return false; }
+                return false;
             }
             else if (obj is Screen)
             {
                 Screen screen;
                 screen = (Screen)obj;
-                if (PositionX == screen.SizeX || PositionX == 0 || PositionY == 0 || PositionY == screen.SizeY)
-                {
+                if (PositionX == screen.SizeX || PositionX == 0 || PositionY == 0 || PositionY == screen.SizeY+1)
                     return true;
-                }
-                else { return false; }
+                return false;
             }
             else if (obj is Food)
             {
                 Food food;
                 food = (Food)obj;
                 if (PositionX == food.PositionX && PositionY == food.PositionY)
-                {
                     return true;
-                }
-                else { return false; }
+                return false;
             }
             else
             {

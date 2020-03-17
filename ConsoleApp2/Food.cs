@@ -9,12 +9,12 @@ namespace ConsoleApp2
         private Random rand = new Random();
         private int sizeX;
         private int sizeY;
-        public Food(int ScreenSizeX, int ScreenSizeY)
+        public Food(int screenSizeX, int screenSizeY)
         {
-            PositionX = rand.Next(1, ScreenSizeX - 1);
-            PositionY = rand.Next(1, ScreenSizeY - 1);
-            sizeX = ScreenSizeX;
-            sizeY = ScreenSizeY;
+            PositionX = rand.Next(1, screenSizeX - 1);
+            PositionY = rand.Next(1, screenSizeY - 1);
+            sizeX = screenSizeX;
+            sizeY = screenSizeY;
         }
 
         public int  PositionX { get; private set; }
