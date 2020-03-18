@@ -21,7 +21,16 @@ namespace ConsoleApp2
         public int PositionY { get; private set; }
 
         private const int speed = 1;
-        private string way = "right";
+
+        private enum Way
+        {
+            Left,
+            Right,
+            Up,
+            Down
+        }
+        private Way way = Way.Right;
+
         ConsoleKeyInfo key;
 
         public void SetPosition(Snake nextSnakePart)
@@ -33,24 +42,24 @@ namespace ConsoleApp2
         public void Turn()
         {
             key = Console.ReadKey();
-            if (key.Key == ConsoleKey.A && way != "right" && PositionX > 0)
+            if (key.Key == ConsoleKey.A && way.ToString() != "right" && PositionX > 0)
             {
-                way = "left";
+                way = Way.Left;
                 PositionX -= speed;
             }
-            if (key.Key == ConsoleKey.D && way != "left" && PositionX < sizeX)
+            if (key.Key == ConsoleKey.D && way.ToString() != "left" && PositionX < sizeX)
             {
-                way = "right";
+                way = Way.Right;
                 PositionX += speed;
             }
-            if (key.Key == ConsoleKey.W && way != "down" && PositionY > 0 )
+            if (key.Key == ConsoleKey.W && way.ToString() != "down" && PositionY > 0 )
             {
-                way = "up";
+                way = Way.Up;
                 PositionY -= speed;
             }
-            if (key.Key == ConsoleKey.S && way != "up" && PositionY < sizeY+1)
+            if (key.Key == ConsoleKey.S && way.ToString() != "up" && PositionY < sizeY+1)
             {
-                way = "down";
+                way = Way.Down;
                 PositionY += speed;
             }
         }
