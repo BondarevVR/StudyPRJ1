@@ -13,11 +13,12 @@ namespace ConsoleApp2
             Food food = new Food(screen.SizeX, screen.SizeY);
 
             //задаем начальную змею //нулевой член массива является направляющей для движения змеи 
-            List<Snake> snakeParts = new List<Snake>(4);
-            snakeParts.Insert(0, new Snake(screen.SizeX / 2, screen.SizeY / 2, screen.SizeX, screen.SizeY)); 
+            List<SnakePart> snakeParts = new List<SnakePart>(4);
+            SnakeHead head = new SnakeHead(screen.SizeX / 2, screen.SizeY / 2, screen.SizeX, screen.SizeY);
+            snakeParts.Insert(0, head); 
             for (int i = 1; i < snakeParts.Capacity; i++)
             {
-                snakeParts.Insert(i, new Snake(screen.SizeX/2-(i-1), screen.SizeY/2, screen.SizeX, screen.SizeY));
+                snakeParts.Insert(i, new SnakePart(screen.SizeX/2-(i-1), screen.SizeY/2, screen.SizeX, screen.SizeY));
             }
 
             bool loose = false;
@@ -35,21 +36,21 @@ namespace ConsoleApp2
                     screen.DisplaySnakePart(snakeParts[i]);
                 }
                 //поворот 
-                snakeParts[0].Turn();
+                head.Turn();
                 //проверка на самосьедение
                 for (int i = 2; i < snakeParts.Count; i++)
                 {
-                    if (snakeParts[0].CheckTouch(snakeParts[i]))
+                    if (head.CheckTouch(snakeParts[i]))
                     {
                         loose = true;
                     }
                 }
-                if (snakeParts[0].CheckTouch(screen))
+                if (head.CheckTouch(screen))
                 {
                     loose = true;
                 }
                 //и перемещение змеи
-                if (snakeParts[0].CheckTouch(snakeParts[1])) { }
+                if (head.CheckTouch(snakeParts[1])) { }
                 else
                 {
                     for (int i = snakeParts.Count - 1; i > 0; i--)
@@ -59,14 +60,14 @@ namespace ConsoleApp2
                 }
 
                 //проверка на еду и расширение змеи
-                if (snakeParts[0].CheckTouch(food))
+                if (head.CheckTouch(food))
                 {
                     Score++;
-                    snakeParts.Add(new Snake(snakeParts[2].PositionX, snakeParts[2].PositionY, screen.SizeX, screen.SizeY));
+                    snakeParts.Add(new SnakePart(snakeParts[2].PositionX, snakeParts[2].PositionY, screen.SizeX, screen.SizeY));
                     food.NewPozition();
                     for (int i = 1; i < snakeParts.Count; i++)
                     {
-                        if (snakeParts[i].CheckTouch(food))
+                        if (head.CheckTouch(food))
                         {
                             food.NewPozition();
                             i = 1;

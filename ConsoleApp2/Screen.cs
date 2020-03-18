@@ -44,7 +44,7 @@ namespace ConsoleApp2
             Console.SetCursorPosition(SizeX, SizeY);
         }
 
-        public void DisplaySnakePart(Snake snakePart)
+        public void DisplaySnakePart(SnakePart snakePart)
         {
             Console.SetCursorPosition(snakePart.PositionX, snakePart.PositionY-1);
             Console.Write("\b");

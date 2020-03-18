@@ -5,11 +5,12 @@ using System.Windows;
  
 namespace ConsoleApp2
 {
-    class Snake
+    class SnakePart
     {
-        private int sizeX;
-        private int sizeY;
-        public Snake(int pX, int pY, int screenSizeX, int screenSizeY)
+        protected int sizeX;
+        protected int sizeY;
+        public SnakePart() { }
+        public SnakePart(int pX, int pY, int screenSizeX, int screenSizeY)
         {
             PositionX = pX;
             PositionY = pY;
@@ -17,84 +18,13 @@ namespace ConsoleApp2
             sizeY = screenSizeY;
         }
 
-        public int PositionX { get; private set; }
-        public int PositionY { get; private set; }
+        public int PositionX { get; protected set; }
+        public int PositionY { get; protected set; }
 
-        private const int speed = 1;
-
-        private enum Way
-        {
-            Left,
-            Right,
-            Up,
-            Down
-        }
-        private Way way = Way.Right;
-
-        ConsoleKeyInfo key;
-
-        public void SetPosition(Snake nextSnakePart)
+        public void SetPosition(SnakePart nextSnakePart)
         {
             PositionX = nextSnakePart.PositionX;
             PositionY = nextSnakePart.PositionY;
-        }
-
-        public void Turn()
-        {
-            key = Console.ReadKey();
-            if (key.Key == ConsoleKey.A && way.ToString() != "right" && PositionX > 0)
-            {
-                way = Way.Left;
-                PositionX -= speed;
-            }
-            if (key.Key == ConsoleKey.D && way.ToString() != "left" && PositionX < sizeX)
-            {
-                way = Way.Right;
-                PositionX += speed;
-            }
-            if (key.Key == ConsoleKey.W && way.ToString() != "down" && PositionY > 0 )
-            {
-                way = Way.Up;
-                PositionY -= speed;
-            }
-            if (key.Key == ConsoleKey.S && way.ToString() != "up" && PositionY < sizeY+1)
-            {
-                way = Way.Down;
-                PositionY += speed;
-            }
-        }
-
-        public bool CheckTouch(Object obj)
-        {
-            if (obj is Snake)
-            {
-                Snake snake;
-                snake = (Snake)obj;
-                if (PositionX == snake.PositionX && PositionY == snake.PositionY)
-                    return true;
-                return false;
-            }
-            else if (obj is Screen)
-            {
-                Screen screen;
-                screen = (Screen)obj;
-                if (PositionX == screen.SizeX || PositionX == 0 || PositionY == 0 || PositionY == screen.SizeY+1)
-                    return true;
-                return false;
-            }
-            else if (obj is Food)
-            {
-                Food food;
-                food = (Food)obj;
-                if (PositionX == food.PositionX && PositionY == food.PositionY)
-                    return true;
-                return false;
-            }
-            else
-            {
-                Console.WriteLine("Error object");
-                return false;
-            }
         }
     }
 }
